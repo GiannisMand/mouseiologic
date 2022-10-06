@@ -18,15 +18,15 @@ export const Navbar = ({ children }) => {
   return (
     <div>
       <AppBar position="static">
-        <Image
+        <img
           src={logo}
+          style={{ height: "auto", width: "5em" }}
           // draggable="false"
           // shift="top"
           // distance="2rem"
           // duration={2000}
           // shiftDuration={300}
-          // height="auto"
-          // width="3.2em"
+
           // sx={{ userSelect: "none" }}
         />
         {/* <Typography variant="h6">News</Typography> */}

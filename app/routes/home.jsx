@@ -1,7 +1,9 @@
-export default function home() {
+import { Paper, Typography } from "@mui/material";
+
+export default function Home() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h2>test</h2>
-    </div>
+    <Paper>
+      <Typography variant="h3">this is the home page</Typography>
+    </Paper>
   );
 }

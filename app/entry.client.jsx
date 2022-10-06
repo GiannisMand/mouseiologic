@@ -1,5 +1,21 @@
-const { RemixBrowser } = require("@remix-run/react");
+import * as React from "react";
+import { hydrate } from "react-dom";
+import { RemixBrowser } from "@remix-run/react";
+import { CacheProvider, ThemeProvider } from "@emotion/react";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const { hydrate } = require("react-dom");
+import createEmotionCache from "./styles/createEmotionCache";
+import theme from "./styles/theme";
 
-hydrate(<RemixBrowser />, document);
+const emotionCache = createEmotionCache();
+
+hydrate(
+  <CacheProvider value={emotionCache}>
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <RemixBrowser />
+    </ThemeProvider>
+  </CacheProvider>,
+  document
+);

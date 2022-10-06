@@ -1,19 +1,32 @@
-const {
+//Imports
+import {
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-} = require("@remix-run/react");
+} from "@remix-run/react";
+
+import { Navbar } from "~/components/Navbar/Navbar.jsx";
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "MouseioLogic",
   viewport: "width=device-width,initial-scale=1",
 });
 
-export default function App() {
+export const App = () => {
+  return (
+    <Document>
+      <Navbar>
+        <Outlet />
+      </Navbar>
+    </Document>
+  );
+};
+
+const Document = ({ children }) => {
   return (
     <html lang="en">
       <head>
@@ -21,11 +34,14 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        {children}
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
   );
-}
+};
+
+export default App;

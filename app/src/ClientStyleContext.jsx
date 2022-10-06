@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-export default createContext({
-  reset: () => {},
-});
+export const ServerStyleContext = createContext(null);
+
+export const ClientStyleContext = createContext(null);

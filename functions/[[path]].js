@@ -19536,39 +19536,54 @@ CssBaseline.propTypes = {
 var CssBaseline_default = CssBaseline;
 
 // app/entry.server.jsx
-var import_react7 = __toESM(require_emotion_react_cjs()), import_create_instance = __toESM(require_emotion_server_create_instance_cjs()), import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime());
+var import_react8 = __toESM(require_emotion_react_cjs()), import_create_instance = __toESM(require_emotion_server_create_instance_cjs());
+
+// app/src/ClientStyleContext.jsx
+init_virtual_process_polyfill();
+init_buffer();
+var import_react6 = __toESM(require_react()), ServerStyleContext = (0, import_react6.createContext)(null), ClientStyleContext = (0, import_react6.createContext)(null);
+
+// app/entry.server.jsx
+var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime());
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext) {
-  let cache = createEmotionCache(), { extractCriticalToChunks } = (0, import_create_instance.default)(cache), html2 = (0, import_server3.renderToString)(/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(() => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react7.CacheProvider, {
-    value: cache,
-    children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ThemeProvider_default2, {
-      theme: theme_default,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CssBaseline_default, {}, void 0, !1, {
-          fileName: "app/entry.server.jsx",
-          lineNumber: 24,
-          columnNumber: 9
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(RemixServer, {
-          context: remixContext,
-          url: request.url
-        }, void 0, !1, {
-          fileName: "app/entry.server.jsx",
-          lineNumber: 25,
-          columnNumber: 9
-        }, this)
-      ]
-    }, void 0, !0, {
+  let cache = createEmotionCache(), { extractCriticalToChunks } = (0, import_create_instance.default)(cache), html2 = (0, import_server3.renderToString)(/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(() => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ServerStyleContext.Provider, {
+    value: null,
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react8.CacheProvider, {
+      value: cache,
+      children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ThemeProvider_default2, {
+        theme: theme_default,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CssBaseline_default, {}, void 0, !1, {
+            fileName: "app/entry.server.jsx",
+            lineNumber: 26,
+            columnNumber: 11
+          }, this),
+          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(RemixServer, {
+            context: remixContext,
+            url: request.url
+          }, void 0, !1, {
+            fileName: "app/entry.server.jsx",
+            lineNumber: 27,
+            columnNumber: 11
+          }, this)
+        ]
+      }, void 0, !0, {
+        fileName: "app/entry.server.jsx",
+        lineNumber: 24,
+        columnNumber: 9
+      }, this)
+    }, void 0, !1, {
       fileName: "app/entry.server.jsx",
-      lineNumber: 22,
+      lineNumber: 23,
       columnNumber: 7
     }, this)
   }, void 0, !1, {
     fileName: "app/entry.server.jsx",
-    lineNumber: 21,
+    lineNumber: 22,
     columnNumber: 5
   }, this), {}, void 0, !1, {
     fileName: "app/entry.server.jsx",
-    lineNumber: 31,
+    lineNumber: 34,
     columnNumber: 31
   }, this)), { styles: styles2 } = extractCriticalToChunks(html2), stylesHTML = "";
   styles2.forEach(({ key, ids, css: css2 }) => {
@@ -20187,14 +20202,6 @@ CircularProgress.propTypes = {
 };
 var CircularProgress_default = CircularProgress;
 
-// app/src/ClientStyleContext.jsx
-init_virtual_process_polyfill();
-init_buffer();
-var import_react8 = __toESM(require_react()), ClientStyleContext_default = (0, import_react8.createContext)({
-  reset: () => {
-  }
-});
-
 // app/components/Navbar.jsx
 init_virtual_process_polyfill();
 init_buffer();
@@ -20406,7 +20413,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), meta = () => ({
   lineNumber: 26,
   columnNumber: 5
 }, this), Document = (0, import_react12.withEmotionCache)(({ children, title: title3 }, emotionCache) => {
-  let clientStyleData = (0, import_react10.useContext)(ClientStyleContext_default);
+  let clientStyleData = (0, import_react10.useContext)(ClientStyleContext);
   return useEnhancedEffect_default2(() => {
     emotionCache.sheet.container = document.head;
     let tags = emotionCache.sheet.tags;
@@ -20563,7 +20570,7 @@ function Home() {
 // server-assets-manifest:@remix-run/dev/assets-manifest
 init_virtual_process_polyfill();
 init_buffer();
-var assets_manifest_default = { version: "a7cfa28b", entry: { module: "/build/entry.client-5IQLTUQB.js", imports: ["/build/_shared/chunk-TAERPY7F.js", "/build/_shared/chunk-G5M72AIL.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-DFDBSU4B.js", imports: ["/build/_shared/chunk-CJGPBC7D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-E5OIIBNE.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VYOM3QZU.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-A7CFA28B.js" };
+var assets_manifest_default = { version: "7556cab4", entry: { module: "/build/entry.client-Y22JYD2D.js", imports: ["/build/_shared/chunk-5AY7M4O7.js", "/build/_shared/chunk-G5M72AIL.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-2NJHRMZC.js", imports: ["/build/_shared/chunk-CJGPBC7D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-E5OIIBNE.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VYOM3QZU.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-7556CAB4.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

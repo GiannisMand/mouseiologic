@@ -22388,30 +22388,31 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
   borderRadius: "0.2em",
   userSelect: "none"
 })), StyledIconButton = styled_default(IconButton_default)(({ theme: theme2 }) => ({
+  [theme2.breakpoints.up("md")]: {
+    display: "none"
+  },
   marginRight: "1em"
+})), StyledBox = styled_default(Box_default)(({ theme: theme2 }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  height: "100%",
+  width: "100%",
+  maxWidth: "1600px"
+})), StyledAppBar = styled_default(AppBar_default)(({ theme: theme2 }) => ({
+  height: "64px",
+  backgroundColor: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%"
 })), Navbar = ({ children }) => {
   let [value, setValue] = import_react12.default.useState(0);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
     children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(AppBar_default, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledAppBar, {
         position: "static",
-        sx: {
-          height: "64px",
-          backgroundColor: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%"
-        },
-        children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Box_default, {
-          sx: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            height: "100%",
-            width: "100%",
-            maxWidth: "1600px"
-          },
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledBox, {
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("img", {
               src: placeholder_default,
@@ -22419,7 +22420,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
               style: { height: "50px", width: "auto", marginLeft: "2em" }
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 66,
+              lineNumber: 69,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledTabs, {
@@ -22435,7 +22436,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                   to: "Home"
                 }, void 0, !1, {
                   fileName: "app/components/Navbar.jsx",
-                  lineNumber: 72,
+                  lineNumber: 75,
                   columnNumber: 13
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledTab, {
@@ -22445,7 +22446,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                   to: "test"
                 }, void 0, !1, {
                   fileName: "app/components/Navbar.jsx",
-                  lineNumber: 78,
+                  lineNumber: 81,
                   columnNumber: 13
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledTab, {
@@ -22455,7 +22456,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                   to: "Home"
                 }, void 0, !1, {
                   fileName: "app/components/Navbar.jsx",
-                  lineNumber: 84,
+                  lineNumber: 87,
                   columnNumber: 13
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledTab, {
@@ -22465,7 +22466,7 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                   to: "Home"
                 }, void 0, !1, {
                   fileName: "app/components/Navbar.jsx",
-                  lineNumber: 90,
+                  lineNumber: 93,
                   columnNumber: 13
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledTab, {
@@ -22475,51 +22476,51 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                   to: "Home"
                 }, void 0, !1, {
                   fileName: "app/components/Navbar.jsx",
-                  lineNumber: 96,
+                  lineNumber: 99,
                   columnNumber: 13
                 }, this)
               ]
             }, void 0, !0, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 71,
+              lineNumber: 74,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledIconButton, {
-              size: "medium",
+              size: "large",
               children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Menu_default, {
                 sx: { fontSize: "1.1em" }
               }, void 0, !1, {
                 fileName: "app/components/Navbar.jsx",
-                lineNumber: 105,
+                lineNumber: 108,
                 columnNumber: 13
               }, this)
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 104,
+              lineNumber: 107,
               columnNumber: 11
             }, this)
           ]
         }, void 0, !0, {
           fileName: "app/components/Navbar.jsx",
-          lineNumber: 56,
+          lineNumber: 68,
           columnNumber: 9
         }, this)
       }, void 0, !1, {
         fileName: "app/components/Navbar.jsx",
-        lineNumber: 45,
+        lineNumber: 67,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledDivContent, {
         children
       }, void 0, !1, {
         fileName: "app/components/Navbar.jsx",
-        lineNumber: 110,
+        lineNumber: 113,
         columnNumber: 7
       }, this)
     ]
   }, void 0, !0, {
     fileName: "app/components/Navbar.jsx",
-    lineNumber: 44,
+    lineNumber: 66,
     columnNumber: 5
   }, this);
 }, Navbar_default = Navbar;
@@ -22716,7 +22717,7 @@ var import_react17 = __toESM(require_react()), import_jsx_dev_runtime = __toESM(
 // server-assets-manifest:@remix-run/dev/assets-manifest
 init_virtual_process_polyfill();
 init_buffer();
-var assets_manifest_default = { version: "3a701115", entry: { module: "/build/entry.client-LK5KAWRN.js", imports: ["/build/_shared/chunk-ZMZBT7RR.js", "/build/_shared/chunk-E55BFY4J.js", "/build/_shared/chunk-6RKL5HGB.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-NR27AS4F.js", imports: ["/build/_shared/chunk-F57PBAQ2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-MTR5HVB5.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-4LZNUQKJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/test": { id: "routes/test", parentId: "root", path: "test", index: void 0, caseSensitive: void 0, module: "/build/routes/test-BKUO4ODH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-3A701115.js" };
+var assets_manifest_default = { version: "524fc598", entry: { module: "/build/entry.client-LK5KAWRN.js", imports: ["/build/_shared/chunk-ZMZBT7RR.js", "/build/_shared/chunk-E55BFY4J.js", "/build/_shared/chunk-6RKL5HGB.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-WBIA5RFX.js", imports: ["/build/_shared/chunk-F57PBAQ2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-MTR5HVB5.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-4LZNUQKJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/test": { id: "routes/test", parentId: "root", path: "test", index: void 0, caseSensitive: void 0, module: "/build/routes/test-BKUO4ODH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-524FC598.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

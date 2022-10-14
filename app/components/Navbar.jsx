@@ -30,7 +30,29 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 }));
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    display: "none",
+  },
+
   marginRight: "1em",
+}));
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  height: "100%",
+  width: "100%",
+  maxWidth: "1600px",
+}));
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  height: "64px",
+  backgroundColor: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
 }));
 
 export const Navbar = ({ children }) => {
@@ -42,27 +64,8 @@ export const Navbar = ({ children }) => {
 
   return (
     <div>
-      <AppBar
-        position="static"
-        sx={{
-          height: "64px",
-          backgroundColor: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            height: "100%",
-            width: "100%",
-            maxWidth: "1600px",
-          }}
-        >
+      <StyledAppBar position="static">
+        <StyledBox>
           <img
             src={logo}
             alt=""
@@ -104,8 +107,8 @@ export const Navbar = ({ children }) => {
           <StyledIconButton size="large">
             <Menu sx={{ fontSize: "1.1em" }} />
           </StyledIconButton>
-        </Box>
-      </AppBar>
+        </StyledBox>
+      </StyledAppBar>
 
       <StyledDivContent>{children}</StyledDivContent>
     </div>

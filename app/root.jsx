@@ -1,5 +1,8 @@
-//Imports
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { withEmotionCache } from "@emotion/react";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
 import {
   Links,
   LiveReload,
@@ -8,12 +11,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { withEmotionCache } from "@emotion/react";
-import { unstable_useEnhancedEffect as useEnhancedEffect } from "@mui/material";
-import theme from "./src/theme";
-import { ClientStyleContext } from "./src/ClientStyleContext";
 
-import { Navbar } from "~/components/Navbar.jsx";
+import { ServerStyleContext, ClientStyleContext } from "./context";
+
+import Navbar from "app/components/Navbar";
+import theme from "app/theme";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -21,33 +23,18 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export const App = () => {
-  return (
-    <Document>
-      <Navbar>
-        <Outlet />
-      </Navbar>
-    </Document>
-  );
-};
-
-const Document = withEmotionCache(({ children, title }, emotionCache) => {
+const Document = withEmotionCache(({ children }, emotionCache) => {
+  const serverStyleData = useContext(ServerStyleContext);
   const clientStyleData = useContext(ClientStyleContext);
 
-  // Only executed on client
-  useEnhancedEffect(() => {
-    // re-link sheet container
+  useEffect(() => {
     emotionCache.sheet.container = document.head;
-    // re-inject tags
     const tags = emotionCache.sheet.tags;
     emotionCache.sheet.flush();
     tags.forEach((tag) => {
-      // eslint-disable-next-line no-underscore-dangle
       emotionCache.sheet._insertTag(tag);
     });
-    // reset cache to reapply global styles
-    clientStyleData.reset();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    clientStyleData?.reset();
   }, []);
 
   return (
@@ -55,10 +42,16 @@ const Document = withEmotionCache(({ children, title }, emotionCache) => {
       <head>
         <Meta />
         <Links />
+        {serverStyleData?.map(({ key, ids, css }) => (
+          <style
+            key={key}
+            data-emotion={`${key} ${ids.join(" ")}`}
+            dangerouslySetInnerHTML={{ __html: css }}
+          />
+        ))}
       </head>
       <body>
         {children}
-
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -67,24 +60,24 @@ const Document = withEmotionCache(({ children, title }, emotionCache) => {
   );
 });
 
-export function ErrorBoundary({ error }) {
-  console.error(error);
-
+export default function App() {
   return (
-    <Document title="Error!">
-      {/* <Layout> */}
-      <div>
-        <h1>There was an error</h1>
-        <p>{error.message}</p>
-        <hr />
-        <p>
-          Hey, developer, you should replace this with what you want your users
-          to see.
-        </p>
-      </div>
-      {/* </Layout> */}
+    <Document>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar>
+          <Outlet />
+        </Navbar>
+      </ThemeProvider>
     </Document>
   );
 }
 
-export default App;
+// // How NextUIProvider should be used on ErrorBoundary
+// export function ErrorBoundary({ error }: { error: Error }) {
+//   return (
+//     <Document title="Error!">
+
+//     </Document>
+//   );
+// }

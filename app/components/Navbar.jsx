@@ -36,3 +36,5 @@ export const Navbar = ({ children }) => {
     </div>
   );
 };
+
+export default Navbar;

@@ -1,17 +1,12 @@
-import * as React from "react";
-import { useState } from "react";
+// entry.client.tsx
+import React, { useState } from "react";
 import { hydrate } from "react-dom";
-import { RemixBrowser } from "@remix-run/react";
 import { CacheProvider } from "@emotion/react";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ClientStyleContext } from "./src/ClientStyleContext";
-import createEmotionCache from "./src/createEmotionCache";
-import theme from "./src/theme";
+import { RemixBrowser } from "@remix-run/react";
 
-// interface ClientCacheProviderProps {
-//   children: React.ReactNode;
-// }
+import { ClientStyleContext } from "./context";
+import createEmotionCache from "./createEmotionCache";
+
 function ClientCacheProvider({ children }) {
   const [cache, setCache] = useState(createEmotionCache());
 
@@ -28,11 +23,7 @@ function ClientCacheProvider({ children }) {
 
 hydrate(
   <ClientCacheProvider>
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <RemixBrowser />
-    </ThemeProvider>
+    <RemixBrowser />
   </ClientCacheProvider>,
   document
 );

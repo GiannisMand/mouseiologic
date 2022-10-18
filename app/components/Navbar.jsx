@@ -3,13 +3,14 @@ import { AppBar, Box, Tabs, Tab, IconButton, Drawer } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
-import { NavLink } from "@remix-run/react";
+import { NavLink, useMatches } from "@remix-run/react";
 
 import { ChevronRight } from "@mui/icons-material";
 
 import Image from "mui-image";
 
 import logo from "public/logos/placeholder.png";
+import { useEffect } from "react";
 
 const StyledDivContent = styled("div")(({ theme }) => ({
   display: "flex",
@@ -77,14 +78,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const navigationLinks = [
-  { label: "Home", href: "Home" },
-  { label: "About", href: "test" },
-  { label: "temp", href: "test" },
-  { label: "temp", href: "test" },
+  { label: "Αρχική", href: "Home" },
+  { label: "Πληροφορίες", href: "test" },
 ];
 
 export const Navbar = ({ children }) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("home");
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -100,12 +99,28 @@ export const Navbar = ({ children }) => {
     setValue(newValue);
   };
 
+  const location = useMatches();
+  console.log(location[1].pathname.toLowerCase().replace(/^\/|\/$/g, ""));
+
+  useEffect(() => {
+    if (location[1].pathname !== "/") {
+      setValue(location[1].pathname.toLowerCase().replace(/^\/|\/$/g, ""));
+    }
+  }, [location]);
+
   return (
     <div>
       <StyledAppBar position="sticky" sx={{ top: 0 }}>
         <StyledBox>
-          <img src={logo} alt="" style={{ height: "50px", width: "auto" }} />
-          <StyledNavTabs value={value} onChange={handleChange}>
+          <NavLink component={NavLink} to="/home" draggable={false}>
+            <img
+              src={logo}
+              alt=""
+              style={{ height: "50px", width: "auto" }}
+              draggable={false}
+            />
+          </NavLink>
+          <StyledNavTabs value={value}>
             {navigationLinks.map((value, index) => (
               <StyledNavTab
                 key={index}
@@ -113,6 +128,8 @@ export const Navbar = ({ children }) => {
                 draggable={false}
                 component={NavLink}
                 to={value.href}
+                value={value.href.toLowerCase()}
+
                 // prefetch="render"
               />
             ))}
@@ -146,7 +163,6 @@ export const Navbar = ({ children }) => {
 
         <StyledDrawerTabs
           value={value}
-          onChange={handleChange}
           orientation="vertical"
           sx={{
             ".MuiTabs-indicator": {
@@ -161,7 +177,8 @@ export const Navbar = ({ children }) => {
               draggable={false}
               component={NavLink}
               to={value.href}
-              // prefetch="render"
+              value={value.href.toLowerCase()}
+              onClick={handleDrawerClose}
             />
           ))}
         </StyledDrawerTabs>

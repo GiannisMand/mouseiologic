@@ -2615,7 +2615,7 @@ Did you call array.map(useContext)? Calling Hooks inside a loop is not supported
         var dispatcher = resolveDispatcher();
         return dispatcher.useRef(initialValue);
       }
-      function useEffect15(create, deps) {
+      function useEffect16(create, deps) {
         var dispatcher = resolveDispatcher();
         return dispatcher.useEffect(create, deps);
       }
@@ -3009,7 +3009,7 @@ Check the top-level render call using <` + parentName + ">.");
         toArray,
         only: onlyChild
       };
-      exports.Children = Children5, exports.Component = Component, exports.PureComponent = PureComponent, exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals, exports.cloneElement = cloneElement$1, exports.createContext = createContext5, exports.createElement = createElement$1, exports.createFactory = createFactory, exports.createRef = createRef, exports.forwardRef = forwardRef23, exports.isValidElement = isValidElement7, exports.lazy = lazy, exports.memo = memo2, exports.useCallback = useCallback11, exports.useContext = useContext6, exports.useDebugValue = useDebugValue3, exports.useEffect = useEffect15, exports.useImperativeHandle = useImperativeHandle4, exports.useLayoutEffect = useLayoutEffect5, exports.useMemo = useMemo7, exports.useReducer = useReducer, exports.useRef = useRef15, exports.useState = useState13, exports.version = ReactVersion;
+      exports.Children = Children5, exports.Component = Component, exports.PureComponent = PureComponent, exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals, exports.cloneElement = cloneElement$1, exports.createContext = createContext5, exports.createElement = createElement$1, exports.createFactory = createFactory, exports.createRef = createRef, exports.forwardRef = forwardRef23, exports.isValidElement = isValidElement7, exports.lazy = lazy, exports.memo = memo2, exports.useCallback = useCallback11, exports.useContext = useContext6, exports.useDebugValue = useDebugValue3, exports.useEffect = useEffect16, exports.useImperativeHandle = useImperativeHandle4, exports.useLayoutEffect = useLayoutEffect5, exports.useMemo = useMemo7, exports.useReducer = useReducer, exports.useRef = useRef15, exports.useState = useState13, exports.version = ReactVersion;
     })();
   }
 });
@@ -28925,6 +28925,27 @@ function useBeforeUnload(callback) {
     window.removeEventListener("beforeunload", callback);
   }), [callback]);
 }
+function useMatches() {
+  let {
+    matches,
+    routeData,
+    routeModules
+  } = useRemixEntryContext();
+  return React2.useMemo(() => matches.map((match) => {
+    var _routeModules$match$r;
+    let {
+      pathname,
+      params
+    } = match;
+    return {
+      id: match.route.id,
+      pathname,
+      params,
+      data: routeData[match.route.id],
+      handle: (_routeModules$match$r = routeModules[match.route.id]) === null || _routeModules$match$r === void 0 ? void 0 : _routeModules$match$r.handle
+    };
+  }), [matches, routeData, routeModules]);
+}
 function useTransition() {
   let {
     transitionManager
@@ -29187,7 +29208,7 @@ __export(root_exports, {
 });
 init_virtual_process_polyfill();
 init_buffer();
-var import_react15 = __toESM(require_react()), import_react16 = __toESM(require_emotion_react_cjs());
+var import_react16 = __toESM(require_react()), import_react17 = __toESM(require_emotion_react_cjs());
 
 // node_modules/@mui/material/esm/styles/index.js
 init_virtual_process_polyfill();
@@ -35661,7 +35682,7 @@ Image.propTypes = {
 var placeholder_default = "/build/_assets/placeholder-EL7BUKQK.png";
 
 // app/components/Navbar.jsx
-var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivContent = styled_default("div")(({ theme: theme2 }) => ({
+var import_react15 = __toESM(require_react()), import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivContent = styled_default("div")(({ theme: theme2 }) => ({
   display: "flex",
   alignItems: "center",
   ...theme2.mixins.toolbar
@@ -35708,50 +35729,60 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
   ...theme2.mixins.toolbar,
   justifyContent: "flex-start"
 })), navigationLinks = [
-  { label: "Home", href: "Home" },
-  { label: "About", href: "test" },
-  { label: "temp", href: "test" },
-  { label: "temp", href: "test" }
+  { label: "\u0391\u03C1\u03C7\u03B9\u03BA\u03AE", href: "Home" },
+  { label: "\u03A0\u03BB\u03B7\u03C1\u03BF\u03C6\u03BF\u03C1\u03AF\u03B5\u03C2", href: "test" }
 ], Navbar = ({ children }) => {
-  let [value, setValue] = (0, import_react13.useState)(0), [drawerOpen, setDrawerOpen] = (0, import_react13.useState)(!1), handleDrawerOpen = () => {
+  let [value, setValue] = (0, import_react13.useState)("home"), [drawerOpen, setDrawerOpen] = (0, import_react13.useState)(!1), handleDrawerOpen = () => {
     setDrawerOpen(!0);
   }, handleDrawerClose = () => {
     setDrawerOpen(!1);
   }, handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+  }, location = useMatches();
+  return console.log(location[1].pathname.toLowerCase().replace(/^\/|\/$/g, "")), (0, import_react15.useEffect)(() => {
+    location[1].pathname !== "/" && setValue(location[1].pathname.toLowerCase().replace(/^\/|\/$/g, ""));
+  }, [location]), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
     children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledAppBar, {
         position: "sticky",
         sx: { top: 0 },
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledBox, {
           children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("img", {
-              src: placeholder_default,
-              alt: "",
-              style: { height: "50px", width: "auto" }
+            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(NavLink2, {
+              component: NavLink2,
+              to: "/home",
+              draggable: !1,
+              children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("img", {
+                src: placeholder_default,
+                alt: "",
+                style: { height: "50px", width: "auto" },
+                draggable: !1
+              }, void 0, !1, {
+                fileName: "app/components/Navbar.jsx",
+                lineNumber: 116,
+                columnNumber: 13
+              }, this)
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 107,
+              lineNumber: 115,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledNavTabs, {
               value,
-              onChange: handleChange,
               children: navigationLinks.map((value2, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledNavTab, {
                 label: value2.label,
                 draggable: !1,
                 component: NavLink2,
-                to: value2.href
+                to: value2.href,
+                value: value2.href.toLowerCase()
               }, index, !1, {
                 fileName: "app/components/Navbar.jsx",
-                lineNumber: 110,
+                lineNumber: 125,
                 columnNumber: 15
               }, this))
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 108,
+              lineNumber: 123,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledIconHamurgerButton, {
@@ -35761,23 +35792,23 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                 sx: { fontSize: "1.1em" }
               }, void 0, !1, {
                 fileName: "app/components/Navbar.jsx",
-                lineNumber: 122,
+                lineNumber: 139,
                 columnNumber: 13
               }, this)
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 121,
+              lineNumber: 138,
               columnNumber: 11
             }, this)
           ]
         }, void 0, !0, {
           fileName: "app/components/Navbar.jsx",
-          lineNumber: 106,
+          lineNumber: 114,
           columnNumber: 9
         }, this)
       }, void 0, !1, {
         fileName: "app/components/Navbar.jsx",
-        lineNumber: 105,
+        lineNumber: 113,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Drawer_default, {
@@ -35802,22 +35833,21 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
                 sx: { fontSize: "1.1em" }
               }, void 0, !1, {
                 fileName: "app/components/Navbar.jsx",
-                lineNumber: 143,
+                lineNumber: 160,
                 columnNumber: 13
               }, this)
             }, void 0, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 142,
+              lineNumber: 159,
               columnNumber: 11
             }, this)
           }, void 0, !1, {
             fileName: "app/components/Navbar.jsx",
-            lineNumber: 141,
+            lineNumber: 158,
             columnNumber: 9
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledDrawerTabs, {
             value,
-            onChange: handleChange,
             orientation: "vertical",
             sx: {
               ".MuiTabs-indicator": {
@@ -35828,34 +35858,36 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), StyledDivConten
               label: value2.label,
               draggable: !1,
               component: NavLink2,
-              to: value2.href
+              to: value2.href,
+              value: value2.href.toLowerCase(),
+              onClick: handleDrawerClose
             }, index, !1, {
               fileName: "app/components/Navbar.jsx",
-              lineNumber: 158,
+              lineNumber: 174,
               columnNumber: 13
             }, this))
           }, void 0, !1, {
             fileName: "app/components/Navbar.jsx",
-            lineNumber: 147,
+            lineNumber: 164,
             columnNumber: 9
           }, this)
         ]
       }, void 0, !0, {
         fileName: "app/components/Navbar.jsx",
-        lineNumber: 127,
+        lineNumber: 144,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(StyledDivContent, {
         children
       }, void 0, !1, {
         fileName: "app/components/Navbar.jsx",
-        lineNumber: 170,
+        lineNumber: 187,
         columnNumber: 7
       }, this)
     ]
   }, void 0, !0, {
     fileName: "app/components/Navbar.jsx",
-    lineNumber: 104,
+    lineNumber: 112,
     columnNumber: 5
   }, this);
 }, Navbar_default = Navbar;
@@ -35882,9 +35914,9 @@ var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), meta = () => ({
   charset: "utf-8",
   title: "MouseioLogic",
   viewport: "width=device-width,initial-scale=1"
-}), Document = (0, import_react16.withEmotionCache)(({ children }, emotionCache) => {
-  let serverStyleData = (0, import_react15.useContext)(ServerStyleContext), clientStyleData = (0, import_react15.useContext)(ClientStyleContext);
-  return (0, import_react15.useEffect)(() => {
+}), Document = (0, import_react17.withEmotionCache)(({ children }, emotionCache) => {
+  let serverStyleData = (0, import_react16.useContext)(ServerStyleContext), clientStyleData = (0, import_react16.useContext)(ClientStyleContext);
+  return (0, import_react16.useEffect)(() => {
     emotionCache.sheet.container = document.head;
     let tags = emotionCache.sheet.tags;
     emotionCache.sheet.flush(), tags.forEach((tag) => {
@@ -36042,7 +36074,7 @@ __export(test_exports, {
 });
 init_virtual_process_polyfill();
 init_buffer();
-var import_react18 = __toESM(require_react()), import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), test = () => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+var import_react19 = __toESM(require_react()), import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime()), test = () => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
   children: "test"
 }, void 0, !1, {
   fileName: "app/routes/test.jsx",
@@ -36053,7 +36085,7 @@ var import_react18 = __toESM(require_react()), import_jsx_dev_runtime = __toESM(
 // server-assets-manifest:@remix-run/dev/assets-manifest
 init_virtual_process_polyfill();
 init_buffer();
-var assets_manifest_default = { version: "5433544a", entry: { module: "/build/entry.client-LSRYTAPB.js", imports: ["/build/_shared/chunk-XWK7OWR7.js", "/build/_shared/chunk-QK4Y5V2B.js", "/build/_shared/chunk-6RKL5HGB.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-4LW5M3IA.js", imports: ["/build/_shared/chunk-EMWFPL3H.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-SGQDNB7D.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VYMI3VOS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/test": { id: "routes/test", parentId: "root", path: "test", index: void 0, caseSensitive: void 0, module: "/build/routes/test-BKUO4ODH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-5433544A.js" };
+var assets_manifest_default = { version: "ac300f5c", entry: { module: "/build/entry.client-3RJ5BYOT.js", imports: ["/build/_shared/chunk-J5S63NKJ.js", "/build/_shared/chunk-QK4Y5V2B.js", "/build/_shared/chunk-6RKL5HGB.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-TGDAEG5A.js", imports: ["/build/_shared/chunk-EMWFPL3H.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-SGQDNB7D.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VYMI3VOS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/test": { id: "routes/test", parentId: "root", path: "test", index: void 0, caseSensitive: void 0, module: "/build/routes/test-BKUO4ODH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-AC300F5C.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

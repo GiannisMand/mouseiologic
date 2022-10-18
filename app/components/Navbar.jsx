@@ -1,9 +1,11 @@
-import React from "react";
-import { AppBar, Box, Tabs, Tab, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { AppBar, Box, Tabs, Tab, IconButton, Drawer } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
 import { NavLink } from "@remix-run/react";
+
+import { ChevronRight } from "@mui/icons-material";
 
 import Image from "mui-image";
 
@@ -15,29 +17,40 @@ const StyledDivContent = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const StyledTabs = styled(Tabs)(({ theme }) => ({
-  marginRight: "2em",
-
+const StyledNavTabs = styled(Tabs)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
-    display: "none",
+    visibility: "hidden",
+    width: 0,
+    height: 0,
   },
 }));
 
-const StyledTab = styled(Tab)(({ theme }) => ({
+const StyledNavTab = styled(Tab)(({ theme }) => ({
   color: "black",
   borderRadius: "0.2em",
   userSelect: "none",
 }));
 
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
+const StyledDrawerTabs = styled(Tabs)(({ theme }) => ({}));
+
+const StyledDrawerTab = styled(Tab)(({ theme }) => ({
+  color: "black",
+  borderRadius: "0.2em",
+  userSelect: "none",
+}));
+
+const StyledIconHamurgerButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "none",
   },
-
-  marginRight: "1em",
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
+  padding: "0 2em 0 2em",
+  [theme.breakpoints.down("md")]: {
+    padding: "0 1em 0 1em",
+  },
+
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -55,8 +68,33 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   width: "100%",
 }));
 
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-start",
+}));
+
+const navigationLinks = [
+  { label: "Home", href: "Home" },
+  { label: "About", href: "test" },
+  { label: "temp", href: "test" },
+  { label: "temp", href: "test" },
+];
+
 export const Navbar = ({ children }) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -64,51 +102,70 @@ export const Navbar = ({ children }) => {
 
   return (
     <div>
-      <StyledAppBar position="static">
+      <StyledAppBar position="sticky" sx={{ top: 0 }}>
         <StyledBox>
-          <img
-            src={logo}
-            alt=""
-            style={{ height: "50px", width: "auto", marginLeft: "2em" }}
-          />
-          <StyledTabs value={value} onChange={handleChange}>
-            <StyledTab
-              label="Home"
-              component={NavLink}
-              draggable={false}
-              to="Home"
-            />
-            <StyledTab
-              label="About"
-              component={NavLink}
-              draggable={false}
-              to="test"
-            />
-            <StyledTab
-              label="Temp"
-              component={NavLink}
-              draggable={false}
-              to="Home"
-            />
-            <StyledTab
-              label="Temp"
-              component={NavLink}
-              draggable={false}
-              to="Home"
-            />
-            <StyledTab
-              label="Temp"
-              component={NavLink}
-              draggable={false}
-              to="Home"
-            />
-          </StyledTabs>
+          <img src={logo} alt="" style={{ height: "50px", width: "auto" }} />
+          <StyledNavTabs value={value} onChange={handleChange}>
+            {navigationLinks.map((value, index) => (
+              <StyledNavTab
+                key={index}
+                label={value.label}
+                draggable={false}
+                component={NavLink}
+                to={value.href}
+                // prefetch="render"
+              />
+            ))}
+          </StyledNavTabs>
 
-          <StyledIconButton size="large">
+          <StyledIconHamurgerButton size="large" onClick={handleDrawerOpen}>
             <Menu sx={{ fontSize: "1.1em" }} />
-          </StyledIconButton>
+          </StyledIconHamurgerButton>
         </StyledBox>
       </StyledAppBar>
+
+      <Drawer
+        sx={{
+          width: 240,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: 240,
+            boxSizing: "border-box",
+          },
+        }}
+        variant="temporary"
+        anchor="right"
+        onClose={handleDrawerClose}
+        open={drawerOpen}
+      >
+        <DrawerHeader>
+          <IconButton size="large" onClick={handleDrawerClose}>
+            <ChevronRight sx={{ fontSize: "1.1em" }} />
+          </IconButton>
+        </DrawerHeader>
+
+        <StyledDrawerTabs
+          value={value}
+          onChange={handleChange}
+          orientation="vertical"
+          sx={{
+            ".MuiTabs-indicator": {
+              left: 0,
+            },
+          }}
+        >
+          {navigationLinks.map((value, index) => (
+            <StyledDrawerTab
+              key={index}
+              label={value.label}
+              draggable={false}
+              component={NavLink}
+              to={value.href}
+              // prefetch="render"
+            />
+          ))}
+        </StyledDrawerTabs>
+      </Drawer>
 
       <StyledDivContent>{children}</StyledDivContent>
     </div>

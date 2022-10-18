@@ -50,7 +50,7 @@ const Document = withEmotionCache(({ children }, emotionCache) => {
           />
         ))}
       </head>
-      <body>
+      <body style={{ overflow: "overlay", backgroundColor: "#F5F5F5" }}>
         {children}
         <ScrollRestoration />
         <Scripts />
